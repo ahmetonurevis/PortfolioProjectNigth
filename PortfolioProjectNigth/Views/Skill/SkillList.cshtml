@@ -1,0 +1,50 @@
+﻿@model List<PortfolioProjectNigth.Models.Skill>
+
+@{
+    ViewBag.Title = "SkillList";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<h2 class="mb-4">Yetenek Listesi ve İşlemleri</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Başlık</th>
+        <th>Değer</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SkillID</td>
+            <td>@item.SkillName</td>
+            <td>@item.Rate</td>
+            <td><a href="/Skill/DeleteSkill/@item.SkillID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Skill/UpdateSkill/@item.SkillID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Skill/CreateSkill/" class="btn btn-info">Yeni Yetenek Girişi</a>
+
+@* 
+
+ 1-Uçak Bileti Rezervasyon
+ 2-Booking 
+ 3-Sosyal Medya Uygulaması
+ 4-Macfit Klonu
+ 5-OBS Sistemi
+ 6-Online Eğitim Platformu
+ 7-Bankacılık Uygulaması
+ 8-Borsa Takip (Dashboard)
+ 9-Etkinlik Organizasyon
+ 10-Hayvan Sahiplendirme
+ 11-Gratis Klonu
+ 12-Film Dizi Yorum Projesi (Ekşi Sözlük)
+ 13-Maçkolik
+ 14-Sağlık MHRS
+
+*@
