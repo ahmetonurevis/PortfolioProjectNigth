@@ -1,6 +1,7 @@
 ﻿using PortfolioProjectNigth.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -62,6 +63,21 @@ namespace PortfolioProjectNigth.Controllers
         public PartialViewResult PartialEducation()
         {
             var values = context.Education.ToList();
+            return PartialView(values);
+        }
+        public PartialViewResult PartialService()
+        {
+            var values = context.Service.ToList();
+            return PartialView(values);
+        }
+        public PartialViewResult PartialPortfolio()
+        {
+            var values = context.Portfolio.ToList();
+            return PartialView(values);
+        }
+        public PartialViewResult PartialTestiomonial()
+        {
+            var values = context.Testimonial.ToList();
             return PartialView(values);
         }
         public PartialViewResult PartialExperience()

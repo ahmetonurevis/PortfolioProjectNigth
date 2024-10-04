@@ -12,14 +12,12 @@ namespace PortfolioProjectNigth.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Service
+    public partial class Portfolio
     {
-        public int ServiceID { get; set; }
+        public int PortfolioID { get; set; }
         public string Title { get; set; }
-        public string Icon { get; set; }
         public string Description { get; set; }
-        public string SubTitle1 { get; set; }
-        public string SubTitle2 { get; set; }
-        public string SubTitle3 { get; set; }
+        public string ImageUrl { get; set; }
+        public string GithubUrl { get; set; }
     }
 }
