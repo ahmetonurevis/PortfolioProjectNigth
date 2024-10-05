@@ -65,6 +65,11 @@ namespace PortfolioProjectNigth.Controllers
             var values = context.Education.ToList();
             return PartialView(values);
         }
+        public PartialViewResult PartialIntern()
+        {
+            var values = context.Intern.ToList();
+            return PartialView(values);
+        }
         public PartialViewResult PartialService()
         {
             var values = context.Service.ToList();

@@ -10,33 +10,63 @@
     <tr>
         <th>#</th>
         <th>Gönderen</th>
-        <th>Tarih</th>
+        <th>Email</th>
+        <th>Kategori</th>
         <th>Konu</th>
+        <th>Mesaj</th>
+        <th>Tarih</th>
         <th>Durum</th>
-        <th>Mesajı Aç</th>
-        <th>Mesajı Sil</th>
+        <th>İşlemler</th>
     </tr>
     @foreach (var item in Model)
     {
         count++;
+
+        string Color = "";
+        switch (item.Category.CategoryName)
+        {
+            case "İstek":
+                Color = "text-danger";  // Kırmızı metin
+                break;
+            case "Görüş":
+                Color = "text-success";  // Yeşil metin
+                break;
+            case "Öneri":
+                Color = "text-primary";  // Mavi metin
+                break;
+            case "Şikayet":
+                Color = "text-warning";  // Sarı metin
+                break;
+            case "Proje":
+                Color = "text-info";     // Açık mavi metin
+                break;
+        }
+
         <tr>
             <td>@count</td>
+
             <td>@item.NameSurname</td>
-            <td>@item.SendDate</td>
+            <td>@item.Email</td>
+            <td><span class="@Color p-2" style="font-size: small">@item.Category.CategoryName</span></td>
             <td>@item.Subject</td>
-
-            @if (item.IsRead == false)
-            {
-                <td><a href="/Message/ChangeMessageStatusToTrue/@item.ContactID" class="btn btn-info">Okundu Olarak İşaretle</a></td>
-            }
-            else
-            {
-                <td><a href="/Message/ChangeMessageStatusToFalse/@item.ContactID" class="btn btn-dark">Okunmadı Olarak İşaretle</a></td>
-            }
-
-            <td><a href="#" class="btn btn-warning">Mesajı Aç</a></td>
-            <td><a href="#" class="btn btn-danger">Mesajı Sil</a></td>
+            <td>@item.Message</td>
+            <td>@item.SendDate.Value.ToString("dd.MM.yyyy")</td>
+            <td>
+                @if (item.IsRead == false)
+                {
+                    <a href="/Message/ChangeMessageStatusToTrue/@item.ContactID" class="btn btn-info">Okundu Olarak İşaretle</a>
+                }
+                else
+                {
+                    <a href="/Message/ChangeMessageStatusToFalse/@item.ContactID" class="btn btn-dark">Okunmadı Olarak İşaretle</a>
+                }
+            </td>
+            <td>
+                <a href="/Message/MessageDetail/@item.ContactID" class="btn btn-warning">Mesajı Aç</a>
+            </td>
+            <td>
+                <a href="/Message/DeleteMessage/@item.ContactID" class="btn btn-danger">Mesajı Sil</a>
+            </td>
         </tr>
     }
-
 </table>

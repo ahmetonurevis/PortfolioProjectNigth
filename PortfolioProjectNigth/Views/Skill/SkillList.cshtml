@@ -1,17 +1,21 @@
-﻿@model List<PortfolioProjectNigth.Models.Skill>
-
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<PortfolioProjectNigth.Models.Skill>
 @{
     ViewBag.Title = "SkillList";
     Layout = "~/Views/Admin/Index.cshtml";
 }
 
-<h2 class="mb-4">Yetenek Listesi ve İşlemleri</h2>
+<h2 class="mb-4">Yeteneklerim Listesi</h2>
+
 
 <table class="table table-bordered">
     <tr>
-        <th>Id</th>
+        <th>ID</th>
         <th>Başlık</th>
         <th>Değer</th>
+        <th>İkon</th>
+        <th>Aktif mi?</th>
         <th>Sil</th>
         <th>Güncelle</th>
     </tr>
@@ -22,29 +26,25 @@
             <td>@item.SkillID</td>
             <td>@item.SkillName</td>
             <td>@item.Rate</td>
+            <td>@item.Icon</td>
+            <td>
+                @if (item.Status == false)
+                {
+                    <a href="/Skill/ChangeSkillToTrue/@item.SkillID" class="btn btn-success">Aktif Yap</a>
+                }
+                else
+                {
+                    <a href="/Skill/ChangeSkillToFalse/@item.SkillID" class="btn btn-dark">Pasif Yap</a>
+                }
+            </td>
             <td><a href="/Skill/DeleteSkill/@item.SkillID" class="btn btn-danger">Sil</a></td>
             <td><a href="/Skill/UpdateSkill/@item.SkillID" class="btn btn-success">Güncelle</a></td>
         </tr>
     }
-
 </table>
-<a href="/Skill/CreateSkill/" class="btn btn-info">Yeni Yetenek Girişi</a>
-
-@* 
-
- 1-Uçak Bileti Rezervasyon
- 2-Booking 
- 3-Sosyal Medya Uygulaması
- 4-Macfit Klonu
- 5-OBS Sistemi
- 6-Online Eğitim Platformu
- 7-Bankacılık Uygulaması
- 8-Borsa Takip (Dashboard)
- 9-Etkinlik Organizasyon
- 10-Hayvan Sahiplendirme
- 11-Gratis Klonu
- 12-Film Dizi Yorum Projesi (Ekşi Sözlük)
- 13-Maçkolik
- 14-Sağlık MHRS
-
-*@
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("SkillList", new { page }), new PagedListRenderOptions
+{
+    LiElementClasses = new List<string>
+    { "page-link"}
+})
+<a href="/Skill/CreateSkill" class="btn btn-info">Yeni Yetenek Girişi</a>

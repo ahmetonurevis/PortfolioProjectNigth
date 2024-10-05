@@ -61,15 +61,6 @@
           <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Expertise">
-          <Key>
-            <PropertyRef Name="ExpertiseID" />
-          </Key>
-          <Property Name="ExpertiseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="30" />
-          <Property Name="Icon" Type="nvarchar" MaxLength="250" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -78,6 +69,15 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="NameSurname" Type="nvarchar" MaxLength="50" />
           <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Intern">
+          <Key>
+            <PropertyRef Name="InternID" />
+          </Key>
+          <Property Name="InternID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Portfolio">
           <Key>
@@ -133,6 +133,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Url" Type="nvarchar" MaxLength="200" />
           <Property Name="Icon" Type="nvarchar" MaxLength="250" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -174,8 +175,8 @@
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Experience" EntityType="Self.Experience" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Expertise" EntityType="Self.Expertise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intern" EntityType="Self.Intern" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
@@ -240,15 +241,6 @@
           <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Expertise">
-          <Key>
-            <PropertyRef Name="ExpertiseID" />
-          </Key>
-          <Property Name="ExpertiseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -302,6 +294,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Contact_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -321,7 +314,6 @@
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Contact" EntityType="Self.Contact" />
           <EntitySet Name="Experience" EntityType="Self.Experience" />
-          <EntitySet Name="Expertise" EntityType="Self.Expertise" />
           <EntitySet Name="Feature" EntityType="Self.Feature" />
           <EntitySet Name="Profile" EntityType="Self.Profile" />
           <EntitySet Name="Service" EntityType="Self.Service" />
@@ -335,6 +327,7 @@
           <EntitySet Name="sysdiagrams" EntityType="DbMyPortfolioNightModel.sysdiagrams" />
           <EntitySet Name="Testimonial" EntityType="DbMyPortfolioNightModel.Testimonial" />
           <EntitySet Name="Portfolio" EntityType="DbMyPortfolioNightModel.Portfolio" />
+          <EntitySet Name="Intern" EntityType="DbMyPortfolioNightModel.Intern" />
         </EntityContainer>
         <EntityType Name="Education">
           <Key>
@@ -376,6 +369,15 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GithubUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Intern">
+          <Key>
+            <PropertyRef Name="InternID" />
+          </Key>
+          <Property Name="InternID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -434,16 +436,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Expertise">
-            <EntityTypeMapping TypeName="DbMyPortfolioNightModel.Expertise">
-              <MappingFragment StoreEntitySet="Expertise">
-                <ScalarProperty Name="ExpertiseID" ColumnName="ExpertiseID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Feature">
             <EntityTypeMapping TypeName="DbMyPortfolioNightModel.Feature">
               <MappingFragment StoreEntitySet="Feature">
@@ -496,6 +488,7 @@
           <EntitySetMapping Name="SocialMedia">
             <EntityTypeMapping TypeName="DbMyPortfolioNightModel.SocialMedia">
               <MappingFragment StoreEntitySet="SocialMedia">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="SocialMediaID" ColumnName="SocialMediaID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
@@ -545,6 +538,16 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Intern">
+            <EntityTypeMapping TypeName="DbMyPortfolioNightModel.Intern">
+              <MappingFragment StoreEntitySet="Intern">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="InternID" ColumnName="InternID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

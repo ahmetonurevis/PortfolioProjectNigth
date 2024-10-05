@@ -30,7 +30,6 @@ namespace PortfolioProjectNigth.Models
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Experience> Experience { get; set; }
-        public virtual DbSet<Expertise> Expertise { get; set; }
         public virtual DbSet<Feature> Feature { get; set; }
         public virtual DbSet<Profile> Profile { get; set; }
         public virtual DbSet<Service> Service { get; set; }
@@ -40,5 +39,6 @@ namespace PortfolioProjectNigth.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Testimonial> Testimonial { get; set; }
         public virtual DbSet<Portfolio> Portfolio { get; set; }
+        public virtual DbSet<Intern> Intern { get; set; }
     }
 }

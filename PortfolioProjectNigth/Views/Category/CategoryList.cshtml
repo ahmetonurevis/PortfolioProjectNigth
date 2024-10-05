@@ -1,40 +1,28 @@
-﻿
+﻿@model List<PortfolioProjectNigth.Models.Category>
+
 @{
-    Layout = null;
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Admin/Index.cshtml";
 }
 
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 <div class="container">
     <br /><br />
-    <table class="table table-bordered">
-        <tr>
-            <th>Kategori Id</th>
-            <th>Kategori Adı</th>
-            <th>Kategori Durum</th>
-            <th>Detaylar</th>
-        </tr>
+          <table class="table table-bordered">
+              <tr>
+                  <th>Kategori Id</th>
+                  <th>Kategori Adı</th>
+              </tr>
 
-        <tr>
-            <td>1</td>
-            <td>Sebze Meyve</td>
-            <td>Aktif</td>
-            <td><button class="btn btn-primary">Detaylar</button></td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-            <td>İçecek</td>
-            <td>Aktif</td>
-            <td><button class="btn btn-primary">Detaylar</button></td>
-        </tr>
-
-        <tr>
-            <td>3</td>
-            <td>Tatlılar</td>
-            <td>Aktif</td>
-            <td><button class="btn btn-primary">Detaylar</button></td>
-        </tr>
+              @foreach (var item in Model)
+              {
+                  <tr>
+                      <td>@item.CategoryID</td>
+                      <td>@item.CategoryName</td>
+                      <td><a href="/Skill/DeleteSkill/@item.CategoryID" class="btn btn-danger">Sil</a></td>
+                  </tr>
+              }
     </table>
-
 </div>
+<a href="/Category/CreateCategory" class="btn btn-info">Yeni Kategori Girişi</a>

@@ -12,11 +12,11 @@ namespace PortfolioProjectNigth.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Expertise
+    public partial class Intern
     {
-        public int ExpertiseID { get; set; }
+        public int InternID { get; set; }
         public string Title { get; set; }
-        public string Icon { get; set; }
+        public string SubTitle { get; set; }
         public string Description { get; set; }
     }
 }
